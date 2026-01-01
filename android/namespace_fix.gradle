@@ -1,0 +1,21 @@
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin('com.android.library')) {
+            def androidExt = project.extensions.findByName('android')
+            if (androidExt != null) {
+                try {
+                    if (!androidExt.hasProperty('namespace') || !androidExt.namespace) {
+                        def manifest = file("${project.projectDir}/src/main/AndroidManifest.xml")
+                        if (manifest.exists()) {
+                            def matcher = manifest.getText('UTF-8') =~ /package="([^"]+)"/
+                            if (matcher) {
+                                androidExt.namespace = matcher[0][1]
+                                println "Set namespace for ${project.name} to ${matcher[0][1]}"
+                            }
+                        }
+                    }
+                } catch (ignored) { }
+            }
+        }
+    }
+}
