@@ -9,13 +9,12 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
+// Inside login.dart
 class _LoginPageState extends State<LoginPage> {
   final _userCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
   String? _error;
 
-  /* 3(login.dart → _login()) for checking username/password and navigating to HomePage */
   Future<void> _login() async {
     final prefs      = await SharedPreferences.getInstance();
     final storedUser = prefs.getString('username');
@@ -27,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/home');
     } else {
-      /* 4(login.dart → setState(_error)) for showing error message on login failure */
       setState(() => _error = 'Invalid username or password.');
     }
   }

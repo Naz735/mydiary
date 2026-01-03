@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+// Inside main.dart
 class _MyAppState extends State<MyApp> {
   bool _isDark = false;
   MaterialColor _seed = Colors.indigo;
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     _loadPrefs();
   }
 
+// Inside main.dart
   Future<void> _loadPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     final dark  = prefs.getBool('isDark') ?? false;
@@ -39,8 +41,8 @@ class _MyAppState extends State<MyApp> {
       _seed   = map[name] ?? Colors.indigo;
     });
   }
-
-  /* 1(main.dart → _firstPage()) for deciding whether to show LoginPage or HomePage after the splash screen */
+  
+// Inside main.dart
   Future<Widget> _firstPage() async {
     await Future.delayed(const Duration(seconds: 2));
     final prefs  = await SharedPreferences.getInstance();
@@ -53,7 +55,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'MyDiary',
       debugShowCheckedModeBanner: false,
-      /* 2(main.dart → ThemeData) for applying dark mode and seed color globally */
       theme: ThemeData(
         colorSchemeSeed: _seed,
         brightness: _isDark ? Brightness.dark : Brightness.light,

@@ -46,6 +46,8 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
       final name = _colors.entries.firstWhere((e) => e.value == _seed).key;
       await prefs.setString('themeColor', name);
     }
+    
+    // Inside theme_settings.dart
     widget.onThemeChanged(_isDark, _seed);
     setState(() {});
   }

@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
 
-  // Feelings selection: use a dropdown with an 'Other' option
   final _otherFeelCtrl = TextEditingController();
   final _descCtrl = TextEditingController();
   final FocusNode _otherFeelFocus = FocusNode();
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     _otherFeelFocus.dispose();
     super.dispose();
   }
-
+// Inside homepage.dart
   // Fetch all diaries from the database
   Future<void> _refresh() async {
     _allDiaries = await SQLHelper.getDiaries();
@@ -51,6 +50,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+// Inside homepage.dart
   // Pick an image using the camera
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+// Inside homepage.dart
   // Start voice recognition for diary input
   Future<void> _startListening() async {
     bool available = await _speech.initialize(
